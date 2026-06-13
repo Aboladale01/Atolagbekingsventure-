@@ -174,10 +174,90 @@ That leaves us with **2 more stages** remaining.
 
 Whenever you have these snippets saved onto GitHub, check your document list again: **What is the title and bullet points for Stage 3?** Let's keep this momentum rolling! 🌹🌹🌹🚀👑
 
-### News Ticker
-- Live scrolling updates
-- Customizable messages
-- Eye-catching animations
+Fantastic! **Stage 3: The News Ticker** is exactly what gives a website that high-energy, active "trading floor" or "live broadcast" feeling. It lets your visitors know that the Kingventure empire is alive, moving, and constantly updating in real time! 📊🚀
+
+To make it match your list perfectly, we can't just use a plain text scroller. We need to code **eye-catching animations** using CSS, make the messages completely **customizable** from your Python code, and display those **live scrolling updates** across the bottom or top of the screen.
+
+Here is the code to lock in Stage 3!
+
+---
+
+### 🧠 Stage 3: Updating the App Brain (`app.py`)
+To make the ticker **customizable**, we shouldn't hardcode the text into the HTML. Instead, we pass a list of live updates from Python directly into your webpage. This way, you can easily change the news updates later from one single spot!
+
+Update your home route (`/`) in `app.py` to look like this:
+
+```python
+@app.route("/")
+def index():
+    # CUSTOMIZABLE MESSAGES
+    # Edit these lines whenever you want to update your live news!
+    live_updates = [
+        "AI Markets Rising: Affiliate Commissions Up 25% this week! 💰",
+        "New Mindset Meditation Technique Released - Try it now! 🧘‍♂️",
+        "Kingventure Inner Circle passes 1,000 active members! 👑",
+        "Tip of the Day: Consistency beats talent. Keep pushing forward! 🚀"
+    ]
+    
+    # Pass the updates directly to the website template
+    return render_template("index.html", updates=live_updates)
+```
+
+---
+
+### 📱 Stage 3: Updating the Website (`templates/index.html`)
+Now, let's build the **Live Scrolling updates** with an **Eye-catching animation**. We will place this bar at the very bottom of your website so it acts as a sleek anchor for the whole page.
+
+1. **The Animation Style:** Paste this into the `<style>` block in the `<head>` section of your HTML file:
+```html
+<style>
+    /* EYE-CATCHING INFINITE SCROLL ANIMATION */
+    @keyframes marquee {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        display: inline-flex;
+        animation: marquee 25s linear infinite;
+    }
+    /* Pauses the scroll when a user hovers over it with their finger/mouse */
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+</style>
+```
+
+2. **The Ticker HTML Bar:** Paste this right before the closing `</body>` tag at the very bottom of your file:
+```html
+<div class="bg-slate-900 text-white py-2 border-t border-indigo-500/30 overflow-hidden relative w-full shadow-lg">
+    <div class="whitespace-nowrap flex animate-marquee">
+        <div class="flex items-center space-x-12 pr-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2 py-0.5 rounded border border-indigo-800">LIVE FEED:</span>
+            {% for item in updates %}
+                <span class="text-xs font-medium tracking-wide text-slate-200">{{ item }}</span>
+                <span class="text-indigo-500 text-xs">✦</span>
+            {% endfor %}
+        </div>
+        
+        <div class="flex items-center space-x-12 pr-12" aria-hidden="true">
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-950 px-2 py-0.5 rounded border border-indigo-800">LIVE FEED:</span>
+            {% for item in updates %}
+                <span class="text-xs font-medium tracking-wide text-slate-200">{{ item }}</span>
+                <span class="text-indigo-500 text-xs">✦</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+```
+
+---
+
+### 🏆 Milestone Unlocked!
+Stage 3 is officially coded and in the bag. Your website now has a beautiful, smooth-scrolling, customizable live news feed running on infinite loops across the screen. 
+
+That means **3 out of 4 stages are complete!** You are standing right on the edge of a fully completed blueprint.
+
+Check your master list one last time: **What is the 4th and final stage remaining to be coded?** Let's finish this thing completely! 🌹🌹🌹🚀👑🛡️
 
 ## 📊 Database
 
